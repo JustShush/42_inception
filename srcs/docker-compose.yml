@@ -1,0 +1,20 @@
+#docker-compose.yml
+
+services:
+  #mariaDB:
+  #  container_name: mariaDB
+  #  build: ./mariaDB
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    ports:
+      - '443:443'
