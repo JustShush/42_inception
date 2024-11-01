@@ -1,13 +1,11 @@
 build:
 	docker compose -f srcs/docker-compose.yml up --build
 
+clean:
+	docker compose -f srcs/docker-compose.yml down
 
 fclean: clean
 	docker system prune -af
 
-clean:
-	docker compose -f srcs/docker-compose.yml down
+re: fclean build
 
-re: clean build
-
-ree: fclean build

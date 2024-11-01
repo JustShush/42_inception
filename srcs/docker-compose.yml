@@ -7,14 +7,34 @@ services:
 
   wordpress:
     container_name: wordpress
-    build: ./requirements/wordpress
+    build: ./requirements/wordpress/.
     ports:
       - "9000:9000"
     env_file:
       - .env
+    volumes:
+      - ./web:/var/www/html
 
   nginx:
     container_name: nginx
     build: ./requirements/nginx/.
     ports:
       - '443:443'
+    volumes:
+      - ./web:/var/www/html
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariaDB
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+
+# volumes:
+#   wordpress:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: /home/dimarque/data/wordpress
+#       o: bind

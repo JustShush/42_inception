@@ -9,11 +9,11 @@ RUN mkdir -p /run/php
 
 WORKDIR /var/www/html
 
+RUN chmod -R +x /var/www/html ; chown -R www-data:www-data /var/www/html
+
 # Download wordpress
 RUN wget https://wordpress.org/latest.zip && \
     unzip latest.zip && \
-    rm -f latest.zip 
-
-
+    rm -f latest.zip
 
 CMD ["php-fpm7.4", "-F"]
