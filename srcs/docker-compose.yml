@@ -1,10 +1,6 @@
 #docker-compose.yml
 
 services:
-  #mariaDB:
-  #  container_name: mariaDB
-  #  build: ./mariaDB
-
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/.
@@ -13,7 +9,9 @@ services:
     env_file:
       - .env
     volumes:
-      - ./web:/var/www/html
+      - wordpress:/var/www/html
+    networks:
+      - net
 
   nginx:
     container_name: nginx
@@ -21,7 +19,9 @@ services:
     ports:
       - '443:443'
     volumes:
-      - ./web:/var/www/html
+      - wordpress:/var/www/html
+    networks:
+      - net
 
   mariadb:
     container_name: mariadb
@@ -30,11 +30,25 @@ services:
       - "3306:3306"
     env_file:
       - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - net
 
-# volumes:
-#   wordpress:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       device: /home/dimarque/data/wordpress
-#       o: bind
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/dimarque/data/wordpress
+      o: bind
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/dimarque/data/mariadb
+      o: bind
+
+networks:
+  net:
+    driver: bridge
