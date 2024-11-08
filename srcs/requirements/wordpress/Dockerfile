@@ -5,6 +5,8 @@ RUN apt update -y && apt upgrade -y && apt install -y \
 
 COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
+EXPOSE 9000
+
 RUN mkdir -p /run/php
 
 COPY script.sh .
@@ -21,4 +23,4 @@ RUN chmod -R +x /var/www/html ; chown -R www-data:www-data /var/www/html
 
 ENTRYPOINT [ "../../../script.sh" ]
 
-CMD [ "/user/sbin/php-fpm7.4 -F" ]
+#CMD [ "/usr/sbin/php-fpm7.4 -F" ]

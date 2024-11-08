@@ -8,13 +8,13 @@ until mysqladmin ping --silent; do
     sleep 2
 done
 
-if [ ! -d "/var/run/mysqld/$MYSQL_DATABASE" ]; then
+if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 
     if [ -z "$MYSQL_DATABASE" ]; then
         echo "MYSQL_DATABASE is not set!"
         exit 1
     fi
-
+    echo "MYSQL_DATABASE is set!"
     # envsubst just expands the env vars.
     envsubst < init.sql > tempInit.sql
     mysql -u root < tempInit.sql

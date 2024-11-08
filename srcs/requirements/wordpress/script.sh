@@ -6,17 +6,27 @@ cd /var/www/html
 #pwd
 ls
 
-if [ ! -f "wp-cli.phar" ]; then
+if [ ! -f "./wp-cli.phar" ]; then
 
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	chmod +x wp-cli.phar
 
+fi
+
+if [ ! -f wp-config.php ]; then
+
 	./wp-cli.phar core download --allow-root
-	./wp-cli.phar config create --dbname=$MYSQL_DATABASE \
+	echo sssssssssssssssssssssssssssssssssssssss
+
+	./wp-cli.phar config create \
+		--path=/var/www/html \
+		--dbname=$MYSQL_DATABASE \
 		--dbuser=$MYSQL_USER \
 		--dbpass=$MYSQL_PASSWORD \
 		--dbhost=mariadb:3306 \
-		--allow-root
+		--allow-root \
+		--force
+
 	./wp-cli.phar core install --url=$DOMAIN_NAME \
 		--title=$WP_TITLE \
 		--admin_user=$WP_ADMIN \
@@ -26,6 +36,9 @@ if [ ! -f "wp-cli.phar" ]; then
 
 	./wp-cli.phar user create $WP_USER $USER_EMAIL \
 		--user_pass=$WP_U_PASS \
-	--allow-root
+		--allow-root
 
+	ls
 fi
+
+php-fpm7.4 -F
