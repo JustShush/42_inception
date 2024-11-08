@@ -1,10 +1,8 @@
-Last msgs from the docker
-
-Downloading WordPress 6.6.2 (en_US)...
-md5 hash verified: 5ad38a84d6e188fea822a7f205ba5588
-Success: WordPress downloaded.
-Error: Database connection error (1698) Access denied for user 'toto'@'wordpress.srcs_net'
-Error: 'wp-config.php' not found.
-Either create one manually or use `wp config create`.
-Error: 'wp-config.php' not found.
-Either create one manually or use `wp config create`.
+241108 15:30:38 mysqld_safe Logging to syslog.
+mariadb    | Waiting for MySQL to start...
+wordpress  | adasdasdasdasdasdasdasdasdakhbsflkhflKAJhfLKSD
+mariadb    | 241108 15:30:38 mysqld_safe Starting mariadbd daemon with databases from /var/lib/mysql
+wordpress  |   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+wordpress  |                                  Dload  Upload   Total   Spent    Left  Speed
+100 6882k  100 6882k    0     0  17.7M      0 --:--:-- --:--:-- --:--:-- 17.7M
+wordpress  | Error: WordPress files seem to already be present here.
