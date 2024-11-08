@@ -2,10 +2,14 @@
 echo 'adasdasdasdasdasdasdasdasdakhbsflkhflKAJhfLKSD'
 
 cd /var/www/html
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
 
-if [ ! -f "wp-config.php" ]; then
+#pwd
+ls
+
+if [ ! -f "wp-cli.phar" ]; then
+
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	chmod +x wp-cli.phar
 
 	./wp-cli.phar core download --allow-root
 	./wp-cli.phar config create --dbname=$MYSQL_DATABASE \
