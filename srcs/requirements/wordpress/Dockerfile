@@ -3,7 +3,7 @@ FROM debian:bullseye
 RUN apt update -y && apt upgrade -y && apt install -y \
     php7.4-fpm php7.4-mysql wget unzip curl
 
-COPY www.conf /etc/php/7.4/fpm/pool.d
+COPY www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN mkdir -p /run/php
 
@@ -20,3 +20,5 @@ RUN chmod -R +x /var/www/html ; chown -R www-data:www-data /var/www/html
 #     rm -f latest.zip
 
 ENTRYPOINT [ "../../../script.sh" ]
+
+CMD [ "/user/sbin/php-fpm7.4 -F" ]
