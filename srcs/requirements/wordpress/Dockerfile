@@ -14,7 +14,8 @@ RUN chmod +x script.sh
 
 WORKDIR /var/www/html
 
-RUN chmod -R +x /var/www/html ; chown -R www-data:www-data /var/www/html
+RUN chmod -R +x /var/www/html && \
+    chown -R www-data:www-data /var/www/html
 
 # Download wordpress
 # RUN wget https://wordpress.org/latest.zip && \

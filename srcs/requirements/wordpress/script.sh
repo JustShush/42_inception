@@ -1,10 +1,10 @@
 #!/bin/bash
 echo 'adasdasdasdasdasdasdasdasdakhbsflkhflKAJhfLKSD'
 
-cd /var/www/html
+chmod u+w .
 
-#pwd
-ls
+cd /var/www/html
+rm -rf /var/www/html/*
 
 if [ ! -f "./wp-cli.phar" ]; then
 
@@ -13,32 +13,37 @@ if [ ! -f "./wp-cli.phar" ]; then
 
 fi
 
-if [ ! -f wp-config.php ]; then
+mv ./wp-cli.phar /usr/local/bin/wp
 
-	./wp-cli.phar core download --allow-root
+if [ ! -f ./wp-config.php ]; then
+
+	wp core download --allow-root
 	echo sssssssssssssssssssssssssssssssssssssss
 
-	./wp-cli.phar config create \
-		--path=/var/www/html \
+	wp config create \
 		--dbname=$MYSQL_DATABASE \
 		--dbuser=$MYSQL_USER \
 		--dbpass=$MYSQL_PASSWORD \
 		--dbhost=mariadb:3306 \
 		--allow-root \
-		--force
+		--force || ls -a
 
-	./wp-cli.phar core install --url=$DOMAIN_NAME \
+	# cat ./wp-config.php
+
+	wp core install --url=$DOMAIN_NAME \
 		--title=$WP_TITLE \
 		--admin_user=$WP_ADMIN \
 		--admin_password=$WP_A_PASS \
 		--admin_email=$ADMIN_EMAIL \
-		--allow-root
+		--allow-root || { echo "Error: wp core install failed"; exit 1; }
 
-	./wp-cli.phar user create $WP_USER $USER_EMAIL \
+	echo passed!
+
+	wp user create $WP_USER $USER_EMAIL \
 		--user_pass=$WP_U_PASS \
 		--allow-root
 
-	ls
 fi
+
 
 php-fpm7.4 -F

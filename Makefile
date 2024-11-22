@@ -1,7 +1,7 @@
 build:
 	@mkdir -p /home/dimarque/data/wordpress
 	@mkdir -p /home/dimarque/data/mariadb
-	docker compose -f srcs/docker-compose.yml up --build
+	@docker compose -f srcs/docker-compose.yml up --build
 
 clean:
 	docker compose -f srcs/docker-compose.yml down

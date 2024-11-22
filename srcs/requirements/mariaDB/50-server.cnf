@@ -8,13 +8,12 @@
 # this is only for the mysqld standalone daemon
 [mysqld]
 
-init_file = /etc/mysql/init.sql
-
 #
 # * Basic Settings
 #
 
 user                    = root
+port                    = 3306
 pid-file                = /run/mysqld/mysqld.pid
 socket                  = /run/mysqld/mysqld.sock
 basedir                 = /usr
@@ -30,8 +29,7 @@ skip-external-locking
 
 # Instead of skip-networking the default is now to listen only on
 # localhost which is more compatible and is not less secure.
-bind-address            = mariadb
-
+bind-address            = 0.0.0.0
 #
 # * Fine Tuning
 #
