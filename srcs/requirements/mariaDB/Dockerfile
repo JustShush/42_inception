@@ -5,7 +5,6 @@ EXPOSE 3306
 RUN apt update ; apt upgrade ; apt install -y mariadb-server
 
 COPY 50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY init.sql /usr/local/bin/init.sql
 
 # Create necessary directories and set permissions
 RUN mkdir -p /var/run/mysqld /var/lib/mysql && \

@@ -1,5 +1,4 @@
 #!/bin/bash
-echo 'adasdasdasdasdasdasdasdasdakhbsflkhflKAJhfLKSD'
 
 chmod u+w .
 
@@ -18,7 +17,6 @@ mv ./wp-cli.phar /usr/local/bin/wp
 if [ ! -f ./wp-config.php ]; then
 
 	wp core download --allow-root
-	echo sssssssssssssssssssssssssssssssssssssss
 
 	wp config create \
 		--dbname=$MYSQL_DATABASE \
@@ -27,8 +25,6 @@ if [ ! -f ./wp-config.php ]; then
 		--dbhost=mariadb:3306 \
 		--allow-root \
 		--force || ls -a
-
-	# cat ./wp-config.php
 
 	wp core install --url=$DOMAIN_NAME \
 		--title=$WP_TITLE \
@@ -39,11 +35,15 @@ if [ ! -f ./wp-config.php ]; then
 
 	echo passed!
 
-	wp user create $WP_USER $USER_EMAIL \
-		--user_pass=$WP_U_PASS \
-		--allow-root
+	# Check if the user already exists
+	if ! wp user get $WP_USER --allow-root &> /dev/null; then
+		wp user create $WP_USER $USER_EMAIL \
+			--user_pass=$WP_U_PASS \
+			--allow-root
+	else
+		echo "User '$WP_USER' already exists, skipping creation."
+	fi
 
 fi
-
 
 php-fpm7.4 -F

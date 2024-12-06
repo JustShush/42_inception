@@ -19,5 +19,8 @@ wp:
 nginx:
 	docker exec -it nginx bash
 
+network:
+	docker network ls
+
 re: fclean build
 

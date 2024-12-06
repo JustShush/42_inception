@@ -19,6 +19,5 @@ if ! mysql -u root -e "USE $MYSQL_DATABASE;" 2>/dev/null; then
 fi
 
 echo "MYSQL_DATABASE is set!"
-ls
 
 wait
